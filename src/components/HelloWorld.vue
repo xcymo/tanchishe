@@ -17,7 +17,7 @@
         <div>
           <p>WASD或方向键控制方向</p>
           <p>按空格暂停/开始</p>
-          <p>按E加速（消耗1长度）</p>
+          <p>按E加速，按Q减速（消耗1长度）</p>
         </div>
         <span>得分：{{score}}</span>
       </div>
@@ -262,6 +262,19 @@ export default {
             clearTimeout(this.counter)
             this.sure()
           }, 500)
+        }
+      }
+      if (e.key === "q") {
+        // 只有长度大于2的时候可以加速，加速会消耗一个长度
+        if(this.snake_pos_arr.length > 2){
+          this.speed = 500
+          clearTimeout(this.counter)
+          this.snake_pos_arr.splice(0, 1)
+          this.go()
+          setTimeout(()=>{
+            clearTimeout(this.counter)
+            this.sure()
+          }, 1500)
         }
       }
     },
